@@ -307,33 +307,3 @@ ax[1].set_xlabel(None)
 ax[1].set_ylabel(None)
 
 st.pyplot(fig)
-
-
-#CLUSTERING
-features = ['season', 'weathersit', 'hr_group', 'casual', 'registered', 'cnt']
-data = main_df[features]
-
-data_encoded = pd.get_dummies(data, columns=['season', 'weathersit', 'hr_group'])
-
-scaler = StandardScaler()
-data_normalized = scaler.fit_transform(data_encoded)
-
-n_clusters = 3
-kmeans = KMeans(n_clusters=n_clusters, random_state=42)
-kmeans.fit(data_normalized)
-
-main_df['cluster'] = kmeans.labels_
-
-def plot_clustering(data, x, y, title):
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.scatterplot(x=x, y=y, hue='cluster', data=data, palette='viridis', ax=ax)
-    ax.set_title(title)
-    ax.set_xlabel(None)  
-    ax.set_ylabel(None)
-    st.pyplot(fig)
-
-st.subheader('Clustering Penyewaan Sepeda')
-
-plot_clustering(main_df, 'season', 'cnt', 'Clustering Berdasarkan Musim dan Total Permintaan')
-plot_clustering(main_df, 'weathersit', 'cnt', 'Clustering Berdasarkan Cuaca dan Total Permintaan')
-plot_clustering(main_df, 'hr_group', 'cnt', 'Clustering Berdasarkan Waktu dan Total Permintaan')
