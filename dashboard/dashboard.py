@@ -306,38 +306,3 @@ ax[1].set_ylabel(None)
 
 st.pyplot(fig)
 
-fig, ax = plt.subplots(figsize=(12, 6))
-
-sns.lineplot(data=hr_group_rentals_df, x='Kelompok waktu', y='Jumlah keseluruhan', label='Jumlah keseluruhan',  ax=ax)
-sns.lineplot(data=hr_group_rentals_df, x='Kelompok waktu', y='Jumlah peminjam biasa', label='Jumlah peminjam biasa', ax=ax)
-sns.lineplot(data=hr_group_rentals_df, x='Kelompok waktu', y='Jumlah peminjam terdaftar', label='Jumlah peminjam terdaftar', ax=ax)
-
-ax.set_title('Perubahan Jumlah Penyewaan Sepeda Selama Waktu Berjalan')
-ax.set_xlabel(None)
-ax.set_ylabel(None)
-ax.legend()
-
-st.pyplot(fig)
-
-#MENYERTAKAN INFORMASI TENTANG JUMLAH RENTAL BERDASARKAN WEEKDAY DAN KELOMPOK WAKTU
-#MENAMPILKAN JUMLAH PEMINJAM BERDASARKAN WEEKDAY KELOMPOK WAKTU DARI TERTINGGI DAN TERENDAH MELALUI SEBUAH VISUALISASI DATA
-heatmap_data = main_df.groupby(['weekday', 'hr_group']).agg({
-    'cnt': 'sum',
-    'casual': 'sum',
-    'registered': 'sum'
-}).reset_index()
-
-pivot_data = heatmap_data.pivot_table(
-    index='weekday',
-    columns='hr_group',
-    values='cnt',
-    aggfunc='sum'
-)
-
-fig, ax = plt.subplots(figsize=(12, 8))
-sns.heatmap(pivot_data, annot=True, cmap='coolwarm', fmt='.0f', ax=ax)
-ax.set_title('Pola Penyewaan Sepeda')
-ax.set_xlabel(None)
-ax.set_ylabel(None)
-
-st.pyplot(fig)
