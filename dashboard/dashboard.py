@@ -187,6 +187,16 @@ st.pyplot(fig)
 #MENAMPILKAN JUMLAH PEMINJAM BERDASARKAN MUSIM DARI TERTINGGI DAN TERENDAH MELALUI SEBUAH VISUALISASI DATA
 st.subheader("BERDASARKAN MUSIM")
 
+fig, ax = plt.subplots(figsize=(16, 6))
+
+palette_cnt = create_palette(season_rentals_df, 'Jumlah keseluruhan')
+sns.barplot(data=season_rentals_df, x='Musim', y='Jumlah keseluruhan', ax=ax, palette=palette_cnt)
+ax.set_title('Jumlah keseluruhan')
+ax.set_xlabel(None)
+ax.set_ylabel(None)
+
+st.pyplot(fig)
+
 fig, ax = plt.subplots(1, 2, figsize=(16, 6))
 
 palette_casual = create_palette(season_rentals_df, 'Jumlah peminjam biasa')
@@ -207,6 +217,16 @@ st.pyplot(fig)
 #MENYERTAKAN INFORMASI TENTANG JUMLAH RENTAL SEPEDA BERDASARKAN WEATHERSIT
 #MENAMPILKAN JUMLAH PEMINJAM BERDASARKAN WEATHERSIT DARI TERTINGGI DAN TERENDAH MELALUI SEBUAH VISUALISASI DATA
 st.subheader("BERDASARKAN CUACA")
+
+fig, ax = plt.subplots(figsize=(16, 6))
+
+palette_cnt = create_palette(weathersit_rentals_df, 'Jumlah keseluruhan')
+sns.barplot(data=weathersit_rentals_df, x='Cuaca', y='Jumlah keseluruhan', ax=ax, palette=palette_cnt)
+ax.set_title('Jumlah keseluruhan')
+ax.set_xlabel(None)
+ax.set_ylabel(None)
+
+st.pyplot(fig)
 
 fig, ax = plt.subplots(1, 2, figsize=(16, 6))
 
@@ -229,6 +249,16 @@ st.pyplot(fig)
 #MENAMPILKAN JUMLAH PEMINJAM BERDASARKAN WEEKDAY DARI TERTINGGI DAN TERENDAH MELALUI SEBUAH VISUALISASI DATA
 st.subheader("BERDASARKAN HARI")
 
+fig, ax = plt.subplots(figsize=(16, 6))
+
+palette_cnt = create_palette(weekday_rentals_df, 'Jumlah keseluruhan')
+sns.barplot(data=weekday_rentals_df, x='Perminggu', y='Jumlah keseluruhan', ax=ax, palette=palette_cnt)
+ax.set_title('Jumlah keseluruhan')
+ax.set_xlabel(None)
+ax.set_ylabel(None)
+
+st.pyplot(fig)
+
 fig, ax = plt.subplots(1, 2, figsize=(16, 6))
 
 palette_casual = create_palette(weekday_rentals_df, 'Jumlah peminjam biasa')
@@ -250,19 +280,15 @@ st.pyplot(fig)
 #MENAMPILKAN JUMLAH PEMINJAM BERDASARKAN KELOMPOK WAKTU DARI TERTINGGI DAN TERENDAH MELALUI SEBUAH VISUALISASI DATA
 st.subheader("BERDASARKAN KELOMPOK WAKTU")
 
-fig, ax = plt.subplots(figsize=(12, 6))
+fig, ax = plt.subplots(figsize=(16, 6))
 
-sns.lineplot(data=hr_group_rentals_df, x='Kelompok waktu', y='Jumlah keseluruhan', label='Jumlah keseluruhan',  ax=ax)
-sns.lineplot(data=hr_group_rentals_df, x='Kelompok waktu', y='Jumlah peminjam biasa', label='Jumlah peminjam biasa', ax=ax)
-sns.lineplot(data=hr_group_rentals_df, x='Kelompok waktu', y='Jumlah peminjam terdaftar', label='Jumlah peminjam terdaftar', ax=ax)
-
-ax.set_title('Perubahan Jumlah Penyewaan Sepeda Selama Waktu Berjalan')
+palette_cnt = create_palette(hr_group_rentals_df, 'Jumlah keseluruhan')
+sns.barplot(data=hr_group_rentals_df, x='Kelompok waktu', y='Jumlah keseluruhan', ax=ax, palette=palette_cnt)
+ax.set_title('Jumlah keseluruhan')
 ax.set_xlabel(None)
 ax.set_ylabel(None)
-ax.legend()
 
 st.pyplot(fig)
-
 
 fig, ax = plt.subplots(1, 2, figsize=(16, 6))
 
@@ -280,6 +306,18 @@ ax[1].set_ylabel(None)
 
 st.pyplot(fig)
 
+fig, ax = plt.subplots(figsize=(12, 6))
+
+sns.lineplot(data=hr_group_rentals_df, x='Kelompok waktu', y='Jumlah keseluruhan', label='Jumlah keseluruhan',  ax=ax)
+sns.lineplot(data=hr_group_rentals_df, x='Kelompok waktu', y='Jumlah peminjam biasa', label='Jumlah peminjam biasa', ax=ax)
+sns.lineplot(data=hr_group_rentals_df, x='Kelompok waktu', y='Jumlah peminjam terdaftar', label='Jumlah peminjam terdaftar', ax=ax)
+
+ax.set_title('Perubahan Jumlah Penyewaan Sepeda Selama Waktu Berjalan')
+ax.set_xlabel(None)
+ax.set_ylabel(None)
+ax.legend()
+
+st.pyplot(fig)
 
 #MENYERTAKAN INFORMASI TENTANG JUMLAH RENTAL BERDASARKAN WEEKDAY DAN KELOMPOK WAKTU
 #MENAMPILKAN JUMLAH PEMINJAM BERDASARKAN WEEKDAY KELOMPOK WAKTU DARI TERTINGGI DAN TERENDAH MELALUI SEBUAH VISUALISASI DATA
